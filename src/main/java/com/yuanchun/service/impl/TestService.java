@@ -17,6 +17,9 @@ import java.util.List;
 @Transactional
 @Service("testService")
 public class TestService extends BaseClass implements ITestService {
+
+
+
     @Resource
     private RmMarketCaseInfoMapper rmMarketCaseInfoMapper;
 
