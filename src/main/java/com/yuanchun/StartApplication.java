@@ -25,6 +25,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class StartApplication {
 
 
+
+
     public static void main(String[] args) {
         //SpringApplication.run(BasicAbilityApplication.class, args);
         String port = PropertiesUtil.getProperty(Const.PROP_NAME_APPLICATION, Const.SERVER_PORT);
