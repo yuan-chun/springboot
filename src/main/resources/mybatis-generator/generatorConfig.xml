@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--引用 mybatisGeneratorConfig.properties 文件-->
+    <properties resource="mybatisGeneratorConfig.properties"/>
+    <context id="MySQLTables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <jdbcConnection driverClass="${jdbc.driver}"
+                          connectionURL="${jdbc.url}"
+                          userId="${jdbc.username}"
+                          password="${jdbc.password}">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!--model-->
+        <javaModelGenerator targetPackage="${model.package}"
+                               targetProject="${target.project}">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!--xml-->
+        <sqlMapGenerator targetPackage="${xml.package}"
+                           targetProject="${xml.target.project}">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!--<sqlMapGenerator targetPackage="com.yuanchun.mapper"
+                         targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>-->
+        <!--java mapper-->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="${mapper.package}"
+                             targetProject="${target.project}">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+        <!--table-->
+        <table tableName="${mysql.tableName}" domainObjectName="${mysql.tableModel}"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+        </table>
+    </context>
+</generatorConfiguration>

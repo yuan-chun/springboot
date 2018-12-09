@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuanchun.dao.RmMarketCaseInfoMapper">
+  <resultMap id="BaseResultMap" type="com.yuanchun.entry.RmMarketCaseInfo">
+    <id column="MARKET_CASE_ID" jdbcType="VARCHAR" property="marketCaseId" />
+    <result column="MARKET_CASE_NAME" jdbcType="VARCHAR" property="marketCaseName" />
+    <result column="MARKET_CASE_BUSI_TYPE" jdbcType="VARCHAR" property="marketCaseBusiType" />
+    <result column="MARKET_CASE_OBJECTIVE" jdbcType="VARCHAR" property="marketCaseObjective" />
+    <result column="MARKET_CASE_FLOW" jdbcType="VARCHAR" property="marketCaseFlow" />
+    <result column="MARKET_CASE_PROTOTYPE" jdbcType="VARCHAR" property="marketCasePrototype" />
+    <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="STATUS_CODE" jdbcType="VARCHAR" property="statusCode" />
+    <result column="REGION_CODE" jdbcType="VARCHAR" property="regionCode" />
+    <result column="GROUP_ID" jdbcType="VARCHAR" property="groupId" />
+    <result column="GROUP_NAME" jdbcType="VARCHAR" property="groupName" />
+    <result column="OPER_NO" jdbcType="VARCHAR" property="operNo" />
+    <result column="OPER_NAME" jdbcType="VARCHAR" property="operName" />
+    <result column="OPER_TIME" jdbcType="TIMESTAMP" property="operTime" />
+    <result column="TEMPLATE_ID" jdbcType="VARCHAR" property="templateId" />
+    <result column="UPDATE_NO" jdbcType="VARCHAR" property="updateNo" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="MARKET_CASE_DESC" jdbcType="VARCHAR" property="marketCaseDesc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MARKET_CASE_ID, MARKET_CASE_NAME, MARKET_CASE_BUSI_TYPE, MARKET_CASE_OBJECTIVE, MARKET_CASE_FLOW, 
+    MARKET_CASE_PROTOTYPE, START_TIME, END_TIME, STATUS_CODE, REGION_CODE, GROUP_ID, 
+    GROUP_NAME, OPER_NO, OPER_NAME, OPER_TIME, TEMPLATE_ID, UPDATE_NO, UPDATE_TIME, MARKET_CASE_DESC
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rm_marketcase_info
+    where MARKET_CASE_ID = #{marketCaseId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectList" parameterType="com.yuanchun.entry.RmMarketCaseInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rm_marketcase_info
+    where MARKET_CASE_ID = #{marketCaseId,jdbcType=VARCHAR}
+  </select>
+</mapper>

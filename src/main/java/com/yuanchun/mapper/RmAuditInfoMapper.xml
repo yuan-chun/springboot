@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuanchun.dao.RmAuditInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.yuanchun.entry.RmAuditInfo" >
+    <id column="SERIAL_ID" property="serialId" jdbcType="VARCHAR" />
+    <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+    <result column="FLOW_ID" property="flowId" jdbcType="VARCHAR" />
+    <result column="TACHE_ID" property="tacheId" jdbcType="VARCHAR" />
+    <result column="AUDIT_NO" property="auditNo" jdbcType="VARCHAR" />
+    <result column="AUDIT_DATE" property="auditDate" jdbcType="VARCHAR" />
+    <result column="AUDIT_RESULT" property="auditResult" jdbcType="VARCHAR" />
+    <result column="AUDIT_DESC" property="auditDesc" jdbcType="VARCHAR" />
+    <result column="NOTE" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SERIAL_ID, ORDER_ID, FLOW_ID, TACHE_ID, AUDIT_NO, AUDIT_DATE, AUDIT_RESULT, AUDIT_DESC, 
+    NOTE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from rm_audit_info
+    where SERIAL_ID = #{serialId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from rm_audit_info
+    where SERIAL_ID = #{serialId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yuanchun.entry.RmAuditInfo" >
+    insert into rm_audit_info (SERIAL_ID, ORDER_ID, FLOW_ID, 
+      TACHE_ID, AUDIT_NO, AUDIT_DATE, 
+      AUDIT_RESULT, AUDIT_DESC, NOTE
+      )
+    values (#{serialId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{flowId,jdbcType=VARCHAR}, 
+      #{tacheId,jdbcType=VARCHAR}, #{auditNo,jdbcType=VARCHAR}, #{auditDate,jdbcType=VARCHAR}, 
+      #{auditResult,jdbcType=VARCHAR}, #{auditDesc,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yuanchun.entry.RmAuditInfo" >
+    insert into rm_audit_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serialId != null" >
+        SERIAL_ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="flowId != null" >
+        FLOW_ID,
+      </if>
+      <if test="tacheId != null" >
+        TACHE_ID,
+      </if>
+      <if test="auditNo != null" >
+        AUDIT_NO,
+      </if>
+      <if test="auditDate != null" >
+        AUDIT_DATE,
+      </if>
+      <if test="auditResult != null" >
+        AUDIT_RESULT,
+      </if>
+      <if test="auditDesc != null" >
+        AUDIT_DESC,
+      </if>
+      <if test="note != null" >
+        NOTE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serialId != null" >
+        #{serialId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="flowId != null" >
+        #{flowId,jdbcType=VARCHAR},
+      </if>
+      <if test="tacheId != null" >
+        #{tacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditNo != null" >
+        #{auditNo,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDate != null" >
+        #{auditDate,jdbcType=VARCHAR},
+      </if>
+      <if test="auditResult != null" >
+        #{auditResult,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDesc != null" >
+        #{auditDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yuanchun.entry.RmAuditInfo" >
+    update rm_audit_info
+    <set >
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="flowId != null" >
+        FLOW_ID = #{flowId,jdbcType=VARCHAR},
+      </if>
+      <if test="tacheId != null" >
+        TACHE_ID = #{tacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditNo != null" >
+        AUDIT_NO = #{auditNo,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDate != null" >
+        AUDIT_DATE = #{auditDate,jdbcType=VARCHAR},
+      </if>
+      <if test="auditResult != null" >
+        AUDIT_RESULT = #{auditResult,jdbcType=VARCHAR},
+      </if>
+      <if test="auditDesc != null" >
+        AUDIT_DESC = #{auditDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        NOTE = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SERIAL_ID = #{serialId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yuanchun.entry.RmAuditInfo" >
+    update rm_audit_info
+    set ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      FLOW_ID = #{flowId,jdbcType=VARCHAR},
+      TACHE_ID = #{tacheId,jdbcType=VARCHAR},
+      AUDIT_NO = #{auditNo,jdbcType=VARCHAR},
+      AUDIT_DATE = #{auditDate,jdbcType=VARCHAR},
+      AUDIT_RESULT = #{auditResult,jdbcType=VARCHAR},
+      AUDIT_DESC = #{auditDesc,jdbcType=VARCHAR},
+      NOTE = #{note,jdbcType=VARCHAR}
+    where SERIAL_ID = #{serialId,jdbcType=VARCHAR}
+  </update>
+</mapper>
