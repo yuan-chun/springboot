@@ -92,7 +92,7 @@ public class UserController extends BaseClass {
         BaseDTO baseDTO = new BaseDTO();
         userMapper.saveUser(user);
         String ex = null;
-        ex.toString();
+//        ex.toString();
         baseDTO.setData(user);
         return baseDTO;
     }

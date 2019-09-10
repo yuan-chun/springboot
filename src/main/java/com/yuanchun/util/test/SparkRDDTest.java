@@ -20,14 +20,12 @@ import java.util.List;
 
 public class SparkRDDTest {
     public static void main(String[] args) {
-        testRDDMap();  //不能改变元素数
+//        testRDDMap();  //不能改变元素数
 //        testRDDFlatMap();  //可以改变元素数
 //		testRDDMapToPair();  //不能改变元素数
-//		testRDDFlatMapToPair();  //可以改变元素数
+		testRDDFlatMapToPair();  //可以改变元素数
 //		testRDDTextLoad();
 //		testRDDLeftJoin();
-//        org.jboss.netty.channel.socket.nio.WorkerPool
-//        com.fasterxml.jackson.module.scala.ser.ScalaIteratorSerializer
     }
 
     public static void testRDDMap(){
@@ -44,13 +42,11 @@ public class SparkRDDTest {
         //将每一行输入拼接 字符，count = 3 count不变
         JavaRDD<String> words = lines.map(
                 new Function<String, String>() {
-
                     @Override
                     public String call(String line) throws Exception {
                         // TODO Auto-generated method stub
                         return line+"hhhhhhhhh";
                     }
-
                 });
         System.out.println("==words.count=="+words.count());
 
@@ -116,7 +112,6 @@ public class SparkRDDTest {
         words.foreach(new VoidFunction<String>() {
 
             private static final long serialVersionUID = 1L;
-
             @Override
             public void call(String result) throws Exception {
                 System.out.println(result);
