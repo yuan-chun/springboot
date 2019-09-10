@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * sql方式二：使用mybatis注解
  */
-@Mapper
+//@Mapper
 public interface UserMapper {
     //分页查询用户
     @Select("SELECT * FROM `user`")
