@@ -20,10 +20,10 @@ import java.util.List;
 
 public class SparkRDDTest {
     public static void main(String[] args) {
-//        testRDDMap();  //不能改变元素数
+        testRDDMap();  //不能改变元素数
 //        testRDDFlatMap();  //可以改变元素数
 //		testRDDMapToPair();  //不能改变元素数
-		testRDDFlatMapToPair();  //可以改变元素数
+//		testRDDFlatMapToPair();  //可以改变元素数
 //		testRDDTextLoad();
 //		testRDDLeftJoin();
     }
@@ -44,28 +44,26 @@ public class SparkRDDTest {
                 new Function<String, String>() {
                     @Override
                     public String call(String line) throws Exception {
-                        // TODO Auto-generated method stub
-                        return line+"hhhhhhhhh";
+                        System.out.println("===map===");
+                        return line+" append hhhhhhhhh";
                     }
                 });
         System.out.println("==words.count=="+words.count());
 
-        words.foreach(new VoidFunction<String>() {
-            private static final long serialVersionUID = 1L;
+//        words.foreach(new VoidFunction<String>() {
+//            @Override
+//            public void call(String result) throws Exception {
+//                System.out.println("===str==="+result);
+//            }
+//        });
 
-            @Override
-            public void call(String result) throws Exception {
-                System.out.println(result);
-            }
-        });
-
+/*
 
         //将每一行输入转化为集合，新的rdd元素 为 集合String[]  count不变
         JavaRDD<String[]> words1 = lines.map(
                 new Function<String, String[]>() {
                     @Override
                     public String[] call(String line) throws Exception {
-                        // TODO Auto-generated method stub
                         return line.split(" ");
                     }
                 });
@@ -81,6 +79,7 @@ public class SparkRDDTest {
             }
         });
         sc.close();
+*/
 
     }
 
