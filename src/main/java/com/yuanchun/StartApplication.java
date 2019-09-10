@@ -1,10 +1,12 @@
 package com.yuanchun;
 
+import com.yuanchun.common.ApplicationProperties;
 import com.yuanchun.util.Const;
 import com.yuanchun.util.PropertiesUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -22,6 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * 方式二：在Mapper接口上加上@Mapper注解，SpringBoot就会自动夹在该Mapper接口，sql在接口上方
  */
 @MapperScan("com.yuanchun.dao")
+@EnableConfigurationProperties({ApplicationProperties.class})
 public class StartApplication {
 
     public static void main(String[] args) {
