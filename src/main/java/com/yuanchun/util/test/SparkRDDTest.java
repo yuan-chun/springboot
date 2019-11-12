@@ -20,12 +20,40 @@ import java.util.List;
 
 public class SparkRDDTest {
     public static void main(String[] args) {
-//        testRDDMap();  //不能改变元素数
-//      testRDDFlatMap();  //可以改变元素数
-//		testRDDMapToPair();  //不能改变元素数
-		testRDDFlatMapToPair();  //可以改变元素数
+//        testRDDMap();
+//      testRDDFlatMap();
+//		testRDDMapToPair();
+//		testRDDFlatMapToPair();
 //		testRDDTextLoad();
 //		testRDDLeftJoin();
+//		testRDDFilter();
+    }
+
+    private static void testRDDFilter() {
+        SparkConf conf = new SparkConf().setMaster("local").setAppName("LineCount");
+        conf.set("spark.testing.memory", "2147480000");
+        System.setProperty("hadoop.home.dir", "F:\\Sources\\hadoop-common-2.2.0-bin-master");
+        JavaSparkContext sc = new JavaSparkContext(conf);
+
+        List<String> lineList = Arrays.asList("yuanchun false" , "xuyun true", "lisi true");
+        JavaRDD<String> lines = sc.parallelize(lineList);
+
+
+        JavaPairRDD<String,Boolean> words = lines.mapToPair(
+                new PairFunction() {
+                    @Override
+                    public Tuple2<String, Boolean> call(Object object)
+                            throws Exception {
+                        String t = (String)object;
+                        return new Tuple2<String, Boolean>(t.split(" ")[0],Boolean.parseBoolean(t.split(" ")[1]));
+                    }
+                });
+        System.out.println("==words.count=="+words.count());
+
+        JavaPairRDD<String,Boolean> filter = words.filter(v1 -> v1._2);
+        System.out.println("==filter.count=="+filter.count());
+
+        filter.foreach(stringBooleanTuple2 -> System.out.println(stringBooleanTuple2._1));
     }
 
     public static void testRDDMap(){
@@ -218,7 +246,7 @@ public class SparkRDDTest {
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         //将每一行输入拼接 字符，count = 3 count不变
-        JavaRDD<String> lines = sc.textFile("E:\\testFile\\testSpark.txt");
+        JavaRDD<String> lines = sc.textFile("G:\\testFile\\testSpark.txt");
 
         //JavaRDD<String> lines1 = sc.textFile("E:\\testFile\\testSpark1.txt");
 
@@ -273,9 +301,9 @@ public class SparkRDDTest {
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         //将每一行输入拼接 字符，count = 3 count不变
-        JavaRDD<String> lines = sc.textFile("E:\\testFile\\testSpark.txt",3);
+        JavaRDD<String> lines = sc.textFile("G:\\testFile\\testSpark.txt",3);
 
-        JavaRDD<String> lines1 = sc.textFile("E:\\testFile\\testSpark1.txt",3);
+        JavaRDD<String> lines1 = sc.textFile("G:\\testFile\\testSpark1.txt",3);
 
         //JavaRDD<String> union = lines.union(lines1); //合并，不去重
         //JavaRDD<String> union = lines.subtract(lines1); //完全相同时去除
