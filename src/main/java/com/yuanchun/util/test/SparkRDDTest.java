@@ -20,10 +20,10 @@ import java.util.List;
 
 public class SparkRDDTest {
     public static void main(String[] args) {
-        testRDDMap();  //不能改变元素数
-//        testRDDFlatMap();  //可以改变元素数
+//        testRDDMap();  //不能改变元素数
+//      testRDDFlatMap();  //可以改变元素数
 //		testRDDMapToPair();  //不能改变元素数
-//		testRDDFlatMapToPair();  //可以改变元素数
+		testRDDFlatMapToPair();  //可以改变元素数
 //		testRDDTextLoad();
 //		testRDDLeftJoin();
     }
@@ -31,7 +31,7 @@ public class SparkRDDTest {
     public static void testRDDMap(){
         SparkConf conf = new SparkConf().setMaster("local").setAppName("LineCount");
         conf.set("spark.testing.memory", "2147480000");
-        System.setProperty("hadoop.home.dir", "D:\\Sources\\hadoop-common-2.2.0-bin-master");
+        System.setProperty("hadoop.home.dir", "F:\\Sources\\hadoop-common-2.2.0-bin-master");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         List<String> lineList = Arrays.asList("hello xuruyun jsfjs" , "hello xuruyun yuanchun", "hello wangfei");
