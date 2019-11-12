@@ -9,6 +9,7 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function;
+import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.api.java.function.PairFlatMapFunction;
 import org.apache.spark.api.java.function.PairFunction;
 import org.apache.spark.api.java.function.VoidFunction;
@@ -16,6 +17,7 @@ import scala.Tuple2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class SparkRDDTest {
@@ -27,6 +29,59 @@ public class SparkRDDTest {
 //		testRDDTextLoad();
 //		testRDDLeftJoin();
 //		testRDDFilter();
+        wordCount();
+    }
+
+    private static void wordCount() {
+        SparkConf conf = new SparkConf().setAppName("LineCount").setMaster("local");
+        conf.set("spark.testing.memory", "2147480000");
+        JavaSparkContext sc = new JavaSparkContext(conf);
+
+        //将每一行输入拼接 字符，count = 3 count不变
+        JavaRDD<String> datas = sc.textFile("G:\\testFile\\testSpark.txt");
+
+        // 分词
+        JavaRDD<String> words = datas.flatMap(new FlatMapFunction<String, String>() {
+            @Override
+            // line表示每一行传入的数据
+            public Iterable<String> call(String line) throws Exception {
+                // 因为split完之后，返回的是一个String类型的数组，所以要用Arrays的asList方法转换成是一个List，然后才能用iterator
+                return Arrays.asList(line.split(" "));
+            }
+
+        });
+
+        // 每个单词记一次数map((单词,1)
+        JavaPairRDD<String, Integer> wordOne = words.mapToPair(new PairFunction<String, String, Integer>() {
+
+            @Override
+            public Tuple2<String, Integer> call(String word) throws Exception {
+                return new Tuple2<String, Integer>(word, 1);
+            }
+
+        });
+
+        // 执行Reduce的操作，把相同单词的value做求和
+        // Function2<Integer, Integer,
+        JavaPairRDD<String, Integer> count = wordOne.reduceByKey(new Function2<Integer, Integer, Integer>() {
+
+            @Override
+            public Integer call(Integer a, Integer b) throws Exception {
+                // TODO Auto-generated method stub
+                return a + b;
+            }
+        });
+
+        // 触发计算
+        List<Tuple2<String, Integer>> result = count.collect();
+
+        // 输出到Console
+        for (Tuple2<String, Integer> r : result) {
+            System.out.println(r._1 + ":" + r._2);
+        }
+
+        // 停止SparkContext对象
+        sc.stop();
     }
 
     private static void testRDDFilter() {
