@@ -29,7 +29,7 @@ public class SparkRDDTest {
 //		testRDDTextLoad();
 //		testRDDLeftJoin();
 //		testRDDFilter();
-        wordCount();
+//        wordCount();
     }
 
     private static void wordCount() {
