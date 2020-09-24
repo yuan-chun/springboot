@@ -22,7 +22,7 @@ import java.util.List;
 
 public class SparkRDDTest {
     public static void main(String[] args) {
-//        testRDDMap();
+        testRDDMap();
 //      testRDDFlatMap();
 //		testRDDMapToPair();
 //		testRDDFlatMapToPair();
@@ -131,6 +131,10 @@ public class SparkRDDTest {
                         return line+" append hhhhhhhhh";
                     }
                 });
+        words.filter(s -> {
+            System.out.println("===filter===");
+            return true;
+        });
         System.out.println("==words.count=="+words.count());
 
 //        words.foreach(new VoidFunction<String>() {

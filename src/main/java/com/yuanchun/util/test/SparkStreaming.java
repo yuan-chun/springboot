@@ -1,11 +1,16 @@
 package com.yuanchun.util.test;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.base.Optional;
+import org.apache.hadoop.hive.ql.exec.spark.session.SparkSession;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.StorageLevels;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.api.java.function.PairFunction;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SaveMode;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaPairDStream;
@@ -31,11 +36,13 @@ public class SparkStreaming implements Serializable {
             public JavaStreamingContext create() {
                 return createContext();
             }
+
         };
 
 
         //可恢复的streaming 当从checkpoint恢复时，即使改了程序也不生效，自己记录 offset
         String checkpoint = "G:\\testFile\\checkpointLocation";
+        System.out.println("11111111 = ");
         JavaStreamingContext ssc = JavaStreamingContext.getOrCreate(checkpoint,createContextFunc);
 
         ssc.start();
@@ -51,6 +58,7 @@ public class SparkStreaming implements Serializable {
         String checkpoint = "G:\\testFile\\checkpointLocation";
         SparkConf sparkConf = new SparkConf().setAppName("JavaNetworkWordCount").setMaster("local[2]");
         JavaStreamingContext ssc = new JavaStreamingContext(sparkConf, Durations.seconds(10));
+        System.out.println("22222222 = ");
         ssc.checkpoint(checkpoint);
         ssc.sparkContext().setLogLevel("ERROR");
 
@@ -133,8 +141,6 @@ public class SparkStreaming implements Serializable {
 
         return ssc;
     }
-
-
 
 
 }
