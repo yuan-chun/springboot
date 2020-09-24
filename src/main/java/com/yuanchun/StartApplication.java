@@ -1,10 +1,12 @@
 package com.yuanchun;
 
+import com.yuanchun.common.ApplicationProperties;
 import com.yuanchun.util.Const;
 import com.yuanchun.util.PropertiesUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -21,15 +23,18 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * 方式一：在启动类上加入@MapperScan，填写Mapper接口所在的包名，SpringBoot就会自动将该包中的Mapper接口进行加载，sql在xnl中
  * 方式二：在Mapper接口上加上@Mapper注解，SpringBoot就会自动夹在该Mapper接口，sql在接口上方
  */
-@MapperScan("com.yuanchun.dao")
+@MapperScan("com.yuanchun.aop")
+@EnableConfigurationProperties({ApplicationProperties.class})
 public class StartApplication {
 
     public static void main(String[] args) {
         //SpringApplication.run(BasicAbilityApplication.class, args);
-        String port = PropertiesUtil.getProperty(Const.PROP_NAME_APPLICATION, Const.SERVER_PORT);
-        new SpringApplicationBuilder(StartApplication.class)
-                .properties("server.port=" + port)
-                .run(args);
+//        String port = PropertiesUtil.getProperty(Const.PROP_NAME_APPLICATION, Const.SERVER_PORT);
+//        new SpringApplicationBuilder(StartApplication.class)
+//                .properties("server.port=" + port)
+//                .run(args);
+
+
     }
 
 }
