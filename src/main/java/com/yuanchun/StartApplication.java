@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 /**
  * 注解默认也是会扫描注解所在包的当前包及子包
  * scanBasePackages可配置扫描路径
-**/
+ **/
 @SpringBootApplication
 /**
  * 开启事务使用
@@ -31,7 +31,7 @@ public class StartApplication {
         //SpringApplication.run(BasicAbilityApplication.class, args);
         String port = PropertiesUtil.getProperty(Const.PROP_NAME_APPLICATION, Const.SERVER_PORT);
         new SpringApplicationBuilder(StartApplication.class)
-                .properties("server.po-conflict_1-rt=" + port)
+                .properties("server.po-rebase-rt=" + port)
                 .run(args);
     }
     // 第一次提交
