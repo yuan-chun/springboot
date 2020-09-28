@@ -31,7 +31,7 @@ public class StartApplication {
         //SpringApplication.run(BasicAbilityApplication.class, args);
         String port = PropertiesUtil.getProperty(Const.PROP_NAME_APPLICATION, Const.SERVER_PORT);
         new SpringApplicationBuilder(StartApplication.class)
-                .properties("server.port=" + port)
+                .properties("server.po-conflict_1-rt=" + port)
                 .run(args);
     }
     // 第一次提交
