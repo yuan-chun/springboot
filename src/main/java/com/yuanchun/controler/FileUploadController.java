@@ -32,6 +32,9 @@ public class FileUploadController {
         return "fileupload";
     }
 
+
+
+
     // 访问路径为：http://ip:port/upload/batch
     @RequestMapping(value = "/upload/batch", method = RequestMethod.GET)
     public String batchUpload() {
