@@ -17,6 +17,9 @@ public class CollectController {
     @Autowired
     private KafkaTemplate kafkaTemplate;
 
+
+
+
     @RequestMapping(value = "/send", method = RequestMethod.GET)
     public void sendKafka(String message) {
         try {
